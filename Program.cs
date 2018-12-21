@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 
 namespace advent
 {
@@ -13,7 +14,7 @@ namespace advent
             var interfaceType = typeof(advent.lib.IPuzzle);
 
             var puzzleProps = new PuzzleProps(args);
-            if (puzzleProps.Input == null)
+            if (puzzleProps.InputResourceName == null)
                 return 1;
 
             var puzzleType = Assembly.GetEntryAssembly()
@@ -32,10 +33,17 @@ namespace advent
             Console.WriteLine($"-- Running {puzzleProps} --");
 
             var puzzle = (IPuzzle)Activator.CreateInstance(puzzleType);
-            puzzle.Run(puzzleProps.Input);
+            try
+            {
+                using (var stream = typeof(PuzzleProps).Assembly.GetManifestResourceStream(puzzleProps.InputResourceName))
+                using (var reader = new StreamReader(stream, Encoding.UTF8))
+                    puzzle.Run(reader);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Puzzle error: {ex.Message}");
+            }
 
-            Console.WriteLine("-- Press any key --");
-            Console.Read();
             return 0;
         }
     }

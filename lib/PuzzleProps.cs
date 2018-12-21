@@ -8,7 +8,7 @@ namespace advent.lib
     {
         public int Day { get; set; } = 1;
         public string FullName { get; set; } = string.Empty;
-        public string Input { get; set; } = null;
+        public string InputResourceName { get; set; } = null;
         public int Part { get; set; } = 1;
         public PuzzleProps(string[] args)
         {
@@ -40,24 +40,12 @@ namespace advent.lib
             }
 
             FullName = $"advent.day{Day}.Part{Part}";
-
-            var resourceName = $"advent.day{Day}.{inputModifier}input.txt";
-
-            try
-            {
-                using (var stream = typeof(PuzzleProps).Assembly.GetManifestResourceStream(resourceName))
-                using (var reader = new StreamReader(stream, Encoding.UTF8))
-                    Input = reader.ReadToEnd();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error getting input from {resourceName}: {ex.Message}");
-            }
+            InputResourceName = $"advent.day{Day}.{inputModifier}input.txt";
         }
 
         public override string ToString()
         {
-            return $"Day {Day}, Part {Part}";
+            return $"Day {Day}, Part {Part}, Input {InputResourceName}";
         }
     }
 }

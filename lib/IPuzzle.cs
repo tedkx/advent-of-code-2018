@@ -1,7 +1,9 @@
+using System.IO;
+
 namespace advent.lib
 {
     public interface IPuzzle
     {
-        void Run(string input);
+        void Run(StreamReader input);
     }
 }
