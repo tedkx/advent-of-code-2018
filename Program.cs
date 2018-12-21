@@ -1,5 +1,6 @@
 ﻿using advent.lib;
 using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 
@@ -11,25 +12,27 @@ namespace advent
         {
             var interfaceType = typeof(advent.lib.IPuzzle);
 
-            var cmdParams = new CmdParams(args);
+            var puzzleProps = new PuzzleProps(args);
+            if (puzzleProps.Input == null)
+                return 1;
 
             var puzzleType = Assembly.GetEntryAssembly()
                 .GetTypes()
                 .FirstOrDefault(t =>
                     interfaceType.IsAssignableFrom(t) &&
-                    t.FullName == cmdParams.FullName
+                    t.FullName == puzzleProps.FullName
                 );
 
             if (puzzleType == null)
             {
-                Console.WriteLine($"Could not find puzzleType {cmdParams.FullName}");
-                return 1;
+                Console.WriteLine($"Could not find puzzleType {puzzleProps.FullName}");
+                return 2;
             }
 
-            Console.WriteLine($"-- Running {cmdParams} --");
+            Console.WriteLine($"-- Running {puzzleProps} --");
 
             var puzzle = (IPuzzle)Activator.CreateInstance(puzzleType);
-            puzzle.Run();
+            puzzle.Run(puzzleProps.Input);
 
             Console.Read();
             return 0;

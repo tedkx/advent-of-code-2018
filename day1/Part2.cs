@@ -5,7 +5,7 @@ namespace advent.day1
 {
     public class Part2 : IPuzzle
     {
-        public void Run()
+        public void Run(string input)
         {
             Console.WriteLine("Running Part 2");
         }
