@@ -34,6 +34,7 @@ namespace advent
             var puzzle = (IPuzzle)Activator.CreateInstance(puzzleType);
             puzzle.Run(puzzleProps.Input);
 
+            Console.WriteLine("-- Press any key --");
             Console.Read();
             return 0;
         }
