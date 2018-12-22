@@ -5,7 +5,11 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+  
   <EmbeddedResource Include="day1/input.txt" />
   <EmbeddedResource Include="day1/testinput.txt" />
+  <EmbeddedResource Include="day2/input.txt" />
+  <EmbeddedResource Include="day2/testinput.txt" />
+
 </ItemGroup>
 </Project>
