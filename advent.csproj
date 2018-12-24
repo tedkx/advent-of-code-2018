@@ -12,6 +12,8 @@
   <EmbeddedResource Include="day2/testinput.txt" />
   <EmbeddedResource Include="day3/input.txt" />
   <EmbeddedResource Include="day3/testinput.txt" />
+  <EmbeddedResource Include="day4/input.txt" />
+  <EmbeddedResource Include="day4/testinput.txt" />
 
 </ItemGroup>
 </Project>

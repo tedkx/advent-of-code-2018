@@ -41,7 +41,7 @@ namespace advent
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Puzzle error: {ex.Message}");
+                Console.WriteLine($"\n*** Puzzle error: {ex.Message}\n\n{ex.StackTrace}\n\n");
             }
 
             return 0;
